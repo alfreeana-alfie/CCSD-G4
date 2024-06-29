@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store Online</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/animate.css">
+    <link rel="stylesheet" href="../../css/owl.carousel.min.css">
+    <link rel="stylesheet"  href="../../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-datepicker.css">
+
+
+    <link rel="stylesheet" href="../../fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="../../css/aos.css">
+    <link rel="stylesheet" href="../../css/jquery.fancybox.min.css">
+
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .site-navbar {
+            background-color: #343a40;
+        }
+
+        .site-navbar a {
+            color: #ffffff;
+        }
+
+        .site-logo a {
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .form-header {
+            padding: 50px 0;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        .form-name {
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+       .form-background {
+           background-color: rgba(255, 255, 255); /* Adjust the transparency here (0.9 means 90% opaque) */
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+       }
+        .site-section {
+            padding: 60px 0;
+        }
+
+        .product {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            margin: 15px 0;
+        }
+
+        .add-to-cart-btn {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .site-footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 40px 0;
+        }
+
+        .site-footer a {
+            color: #ffffff;
+        }
+
+        .site-footer p {
+            margin: 0;
+        }
+
+         .quantity {
+            margin-top: 15px;
+            text-align: center;
+            padding: 1%
+        }
+
+        .quantity label {
+            display: block;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+
+        .quantity input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .quantity input[type="number"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .icon-facebook, .icon-twitter, .icon-instagram, .icon-linkedin {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <div class="site-navbar-wrap">
+        <div class="site-navbar site-navbar-target js-sticky-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 col-lg-3">
+                        <h1 class="my-0 site-logo"><a href="index.html">Booke Store Online</a></h1>
+                    </div>
+                    <div class="col-6 col-lg-9">
+                        <nav class="site-navigation text-right" role="navigation">
+                            <div class="container">
+                                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3">
+                                    <a href="#" class="site-menu-toggle js-menu-toggle text-black">
+                                        <span class="icon-menu h3"></span>
+                                    </a>
+                                </div>
+                                <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
+                                    <li><a th:href="${#authentication.name}=='anonymousUser' ? @{/index} :  @{/indexL}" class="nav-link"><div >Home</div></a></li>
+                                    <li th:switch="${users.role.displayValue}">
+                                        <a th:case="'CUSTOMER'" th:href="@{/PBL}" class="nav-link">Shop</a>
+                                    </li>
+                                    <li th:switch="${users.role.displayValue}">
+                                        <a th:case="'CUSTOMER'" th:href="@{/CustomerCart/{userId}(userId=${users.id})}" class="nav-link">Carts</a>
+                                        <a th:case="'ADMIN'" th:href="@{/PSL}" class="nav-link">Products List</a>
+                                    </li>
+                                    <li th:switch="${users.role.displayValue}">
+                                        <a th:case="'CUSTOMER'" th:href="@{/OLC/{userId}(userId=${users.id})}" class="nav-link">Orders List</a>
+                                        <a th:case="'ADMIN'" th:href="@{/OL}" class="nav-link">Order Management</a>
+                                    </li>
+                                    <li th:switch="${users.role.displayValue}">
+                                        <a th:case="'ADMIN'" th:href="@{/UL}" class="nav-link">User Management</a>
+                                    </li>
+                                    <li><a th:href="@{/UP/{userId}(userId=${users.id})}" class="nav-link"><div th:text="${#authentication.name}=='anonymousUser' ? 'Sign Up Now' :  'View User Profile'"></div></a></li>
+                                    <li><a th:href="@{/logout}" class="nav-link"><div th:text="${#authentication.name}=='anonymousUser' ? '' :  'Logout'"></div></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-header">
+        <div class="container">
+            <h2 class="form-name">List Of Products</h2>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="filter-section">
+                <form id="filterForm" class="form-background">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="keyword">Keyword:</label>
+                            <input type="text" id="keyword" name="keyword" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="categoryId">Category:</label>
+                            <select class="form-control" id="categoryId" name="categoryId">
+                                <option value="0">-- Select Category --</option>
+                                <option th:each="category : ${categories}"
+                                        th:value="${category.id}"
+                                        th:text="${category.description}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="language">Language:</label>
+                            <select class="form-control" id="language" name="language">
+                                <option value="">-- Select Language --</option>
+                                <option value="EN">English</option>
+                                <option value="MY">Malay</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="minPrice">Min Price:</label>
+                            <input type="number" id="minPrice" name="minPrice" class="form-control" min="0">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="maxPrice">Max Price:</label>
+                            <input type="number" id="maxPrice" name="maxPrice" class="form-control" min="0">
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-warning ml-auto">Apply Filters</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section" id="features-section">
+        <div class="container">
+            <div class="row mb-5 product" th:if="${not #lists.isEmpty(products)}">
+                <div th:each="product : ${products}" class="col-md-3" style="padding: 5%;">
+                    <img th:src="${product.imageUrl}" alt="" style="width: 300px; height: 200px;">
+                    <h3 class="product-title" th:text="${product.title}">Product Title</h3>
+                    <h4 class="product-title" th:text="'RM ' + ${product.price}">Price</h4>
+<!--                    <button class="btn-sm btn-warning add-to-cart-btn">Add to Cart</button>-->
+                    <div>
+                        <form action="#" th:action="@{/saveCart}" th:object="${cart}" method="post" class="form-group">
+                            <input type="hidden" th:value="${users.id}" th:attr="name='userId'"/>
+                            <input type="hidden" th:field="*{userId}"/>
+
+                            <input type="hidden" th:value="${product.id}" th:attr="name='productId'"/>
+                            <input type="hidden" th:field="*{productId}"/>
+
+                            <input type="hidden" th:value="${product.title}" th:attr="name='productName'"/>
+                            <input type="hidden" th:field="*{productName}"/>
+
+                            <input type="hidden" th:value="${product.price}" th:attr="name='unitPrice'"/>
+                            <input type="hidden" th:field="*{unitPrice}"/>
+
+                            <div class="quantity">
+                                <input type="number" th:name="quantity" id="quantity" name="quantity" value="0" min="0">
+                            </div>
+<!--                            <input type="hidden" th:field="*{remarks}"/>-->
+                            <tr>
+                                <td><button class="btn btn-dark w-100" type="submit">Add to Cart</button></td>
+                            </tr>
+                        </form>
+<!--                        <a th:href="@{saveCart(userId=${users.id}, productId=${product.id}, productName=${product.title}, unitPrice=${product.price}, quantity=${quantity})}" class="btn btn-dark w-100">Add to Cart</a>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5 product" th:if="${#lists.isEmpty(products)}">
+                <div class="col-md-12 text-center" >
+                    <p>No items found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row pt-5 mt-5 text-center">
+                <div class="col-md-12">
+                    <div class="mb-4">
+                        <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                        <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                        <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                        <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                    </div>
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="../../js/jquery-3.3.1.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/owl.carousel.min.js"></script>
+<script src="../../js/aos.js"></script>
+<script src="../../js/jquery.sticky.js"></script>
+<script src="../../js/stickyfill.min.js"></script>
+<script src="../../js/jquery.easing.1.3.js"></script>
+<script src="../../js/isotope.pkgd.min.js"></script>
+
+<script src="../../js/jquery.fancybox.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script>
+    document.getElementById('filterForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var formData = new FormData(this); // Create FormData object with form data
+        var queryParams = new URLSearchParams(formData).toString(); // Convert FormData to URLSearchParams string
+
+        var url = '/PBLS?' + queryParams; // Construct URL with query parameters
+
+        window.location.href = url; // Redirect to the constructed URL
+    });
+</script>
+
+</body>
+</html>
